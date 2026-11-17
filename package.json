@@ -1,0 +1,20 @@
+{
+  "name": "multi-tenant-rbac-starter",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "dotenv -e .env -- concurrently -k -n api,web \"npm run dev -w @rbac/api\" \"npm run dev -w @rbac/web\"",
+    "db:migrate": "dotenv -e .env -- npm run db:migrate -w @rbac/api",
+    "db:generate": "dotenv -e .env -- npm run db:generate -w @rbac/api",
+    "db:deploy": "dotenv -e .env -- npm run db:deploy -w @rbac/api",
+    "build": "dotenv -e .env -- npm run build -w @rbac/api && dotenv -e .env -- npm run build -w @rbac/web",
+    "test": "npm run test -w @rbac/api",
+    "audit": "npm audit --omit=dev"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "dotenv-cli": "^8.0.0"
+  }
+}
