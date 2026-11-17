@@ -148,7 +148,7 @@ export default function Home() {
                 <button className="textbutton danger" disabled={busy} onClick={() => { if (window.confirm('Remove this member?')) void execute(async () => {
                   await api('/organizations/' + selected + '/members/' + m.userId,'DELETE'); await refreshDetail(selected,isManager);
                 }); }}>Remove</button></div>}
-              {!isManager && m.userId === user.id && m.role !== 'OWNER' && <button className="textbutton" disabled={busy} onClick={() => void execute(async () => {
+              {m.userId === user.id && m.role !== 'OWNER' && <button className="textbutton" disabled={busy} onClick={() => void execute(async () => {
                 await api('/organizations/' + selected + '/members/' + m.userId,'DELETE'); await refreshOrgs();
               })}>Leave</button>}</div>)}</div>
           </section>
